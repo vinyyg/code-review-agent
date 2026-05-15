@@ -155,3 +155,26 @@ def _log_summary(result: AgentResult) -> None:
         f"(~${result.estimated_cost_usd:.4f}), "
         f"tools: {result.tools_called}"
     )
+async def run_agent_async(
+    system_prompt: str,
+    user_message: str,
+    registry: ToolRegistry,
+    submit_tool_name: str = "submit_findings",
+    config: AgentConfig | None = None,
+) -> AgentResult:
+    """
+    Async wrapper around run_agent for parallel specialist execution.
+    Runs the synchronous agent in a thread pool to avoid blocking the event loop.
+    """
+    import asyncio
+    loop = asyncio.get_event_loop()
+    return await loop.run_in_executor(
+        None,  # default ThreadPoolExecutor
+        lambda: run_agent(
+            system_prompt=system_prompt,
+            user_message=user_message,
+            registry=registry,
+            submit_tool_name=submit_tool_name,
+            config=config,
+        )
+    )    
