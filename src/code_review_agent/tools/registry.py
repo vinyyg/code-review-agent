@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Callable
 
 from code_review_agent.tools.base import ToolResponse
+from code_review_agent.tools.schemas import SUBMIT_FINDINGS
 
 
 # ─── Tool definition ──────────────────────────────────────────────────────────
@@ -100,5 +101,9 @@ def build_registry(repo_root: Path) -> ToolRegistry:
         schema=RUN_RADON,
         handler=lambda **kw: run_radon(repo_root, **kw),
     ))
-
+    registry.register(Tool(
+        name="submit_findings",
+        schema=SUBMIT_FINDINGS,
+        handler=lambda **kw: ToolResponse.success(kw),
+    ))
     return registry
