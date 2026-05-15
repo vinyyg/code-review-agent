@@ -73,8 +73,11 @@ def read_file(
         "total_lines": total_lines,
         "range": [start + 1, start + len(selected)],
         "content": numbered,
-        "truncated": truncated,
-        **({"truncation_note": f"Showing first {MAX_LINES_DEFAULT} of {end - start} requested lines."} if truncated else {}),
+         "truncated": truncated,
+        **(
+            {"truncation_note": f"Showing first {MAX_LINES_DEFAULT} of {end - start} lines."}
+            if truncated else {}
+        ),
     })
 
 
