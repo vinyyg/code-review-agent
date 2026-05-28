@@ -27,7 +27,7 @@ When calling submit_findings, every finding MUST follow this structure:
   - the fix depends on context you cannot see
 
 ### Summary fields
-- **summary**: one paragraph overview for humans (max 300 chars)
+- **summary**: one paragraph overview for humans — STRICT LIMIT: max 300 characters Count carefully. If needed, write less.
 - **tools_used**: tool names you called
 - **files_examined**: files you read or analyzed
 

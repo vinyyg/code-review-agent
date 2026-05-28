@@ -36,6 +36,7 @@ def _setup_logging(verbose: bool) -> None:
 def run(
     base: str = typer.Option(..., help="Base commit SHA"),
     head: str = typer.Option(..., help="Head commit SHA"),
+    clean: bool = typer.Option(False, "--clean", help="Delete comments from specialists not active in this run"),
     pr: Optional[int] = typer.Option(None, help="PR number to post comments to"),
     full_scan: bool = typer.Option(False, "--full-scan", help="Review entire codebase"),
     repo_path: Path = typer.Option(Path("."), "--repo", help="Path to repository"),
@@ -100,6 +101,7 @@ def run(
                 reports=result.reports,
                 pr_number=pr,
                 commit_sha=head,
+                clean_orphans=clean,
             )
             console.print(f"[green]✅ Posted {len(result.reports)} comment(s) to PR #{pr}[/green]")
         except Exception as e:
