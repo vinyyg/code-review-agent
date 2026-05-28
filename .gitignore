@@ -219,3 +219,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Eval artifacts (may contain generated secrets in test data)
+evals/datasets/
+evals/reports/
