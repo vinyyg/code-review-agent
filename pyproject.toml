@@ -9,6 +9,8 @@ dependencies = [
     "rich",
     "pydantic",
     "gitpython",
+    "httpx",
+    "python-dotenv",
 ]
 
 [project.optional-dependencies]
